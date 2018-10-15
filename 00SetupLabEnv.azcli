@@ -87,7 +87,7 @@ echo "IoT Device Name" $iotDeviceName
 az iot hub device-identity show --device-id $iotDeviceName \
     --hub-name $iotHubName
 
-pwd='1q2w3e4r'$num
+pwd='1q2w3e4r5t6y'$num
 
 az vm create --resource-group $resourceGroup --name EdgeVM$num --image Canonical:UbuntuServer:16.04-LTS:latest --admin-username azureadmin --admin-password $pwd --size Standard_B1ms
 
