@@ -4,7 +4,7 @@
 
 1. Create Resources
 
-Create a DSVM Windows 2016 
+Create a resource for lab incluing a DSVM Windows 2016 
 
 2. Download Sample Code (Node.js)
 
@@ -16,14 +16,14 @@ Download the sample Node.js project from https://github.com/Azure-Samples/azure-
 
 ## Device-to-Cloud (D2C)
 
-https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-node
+Lab 1 https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-node
 
 
 ## Send Telemetry to Cloud
 
 ## Cloud-to-Device (C2D)
 
-https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-control-device-node
+Lab 2 https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-control-device-node
 
 ## Routing Messages
 
@@ -31,12 +31,12 @@ https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-control-device-node
 
 ## Configure Your Devices
 
-https://docs.microsoft.com/en-us/azure/iot-hub/tutorial-device-twins
+Lab 3 https://docs.microsoft.com/en-us/azure/iot-hub/tutorial-device-twins
 
 ## Schedule and Broadcast Jobs
 
-https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-node-node-schedule-jobs#schedule-jobs-for-calling-a-direct-method-and-updating-a-device-twins-properties
+Lab 4 https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-node-node-schedule-jobs#schedule-jobs-for-calling-a-direct-method-and-updating-a-device-twins-properties
 
 ## IoT Edge
 
-https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux
+Lab 5 https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux
