@@ -1,12 +1,10 @@
 # az-iot-hol
 
-Scenario
-
-Architecutre
-
 ## Setup Hands-on Lab Environment
 
 1. Create Resources
+
+Create a DSVM Windows 2016 
 
 2. Download Sample Code (Node.js)
 
@@ -42,5 +40,3 @@ https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-node-node-schedule-jobs#s
 ## IoT Edge
 
 https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux
-
-az vm create --resource-group IoTEdgeResources --name EdgeVM --image Canonical:UbuntuServer:16.04-LTS:latest --admin-username azureuser --generate-ssh-keys --size Standard_B1ms
