@@ -40,3 +40,10 @@ Lab 4 https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-node-node-schedule-
 ## IoT Edge
 
 Lab 5 https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux
+
+tempSensor
+
+URL
+```bash
+mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0
+```
