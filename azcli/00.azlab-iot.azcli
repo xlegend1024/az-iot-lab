@@ -26,17 +26,6 @@ fi
 
 echo "This script will create a resource goup in Korea South region"
 echo "Type location for the lab"
-read -p "Is it correct? [Y/N]" answer
-
-# set azure region
-if [ ! -z "$answer" ]; then
-    echo "Please check region again."
-elif !( $answer = "Y" ) then
-    echo "Please check region again."
-    exit
-else then 
-    echo "Resources will be created in Korea South region"
-fi
 
 # az account list-locations --output table --query []['name','displayName']
 # echo "Type location for the lab"
@@ -81,7 +70,7 @@ sqlpwd=1q2w3e4r5t^Y
 # Create the Resource Group
 # if you have exsiting one you can skip this part
 echo "1. Create Resource Group " $rgName
-az group create --name $rgName --location $loc 
+az group create --name $rgName --location $loc
 
 # Storage Account
 # Create the Storage Account
@@ -93,24 +82,83 @@ blobConn=$(az storage account show-connection-string --name $blobName --resource
 blobkey1=$(az storage account keys list -n $blobName -g $rgName --output tsv --query "[0].value" | tr -d '"')
 
 # Create a container
-echo "3. Create container in the blob" $containerName 
 az storage container create --name $containerName --connection-string $blobConn
 
+# Create a DB and restore Database from backup
+# Download Sample DB (Backup)
+echo "4. Download a sample DB"
+file_to_upload="./iotreportdb.bacpac"
+objName=iotreportdb.bacpac
+# wget is tool you can download files
+# Cloud Shell has wget.exe on both Bash or Powershell 
+wget -O $file_to_upload https://github.com/xlegend1024/az-cloudscale-adv-analytics/raw/master/sampledb/wwimdb.bacpac 
+
+# Uploading a SQLDB Backup file
+echo "5. Upload sample db to blob"
+az storage blob upload --container-name $containerName --file $file_to_upload --name $objName --connection-string $blobConn
+# Confirm file is uploaded 
+az storage blob list --container-name $containerName --connection-string $blobConn --output table
+
+# Create SQL Server and restore database from backup 
+# Create a SQL Server
+echo "6. Create a SQL Server " $sqlsvrName
+az sql server create --admin-user $sqladm --admin-password $sqlpwd --location $loc --name $sqlsvrName --resource-group $rgName 
+
+# Update SQL Server Firewall rule
+# Opeing all firewall is NOT recommend for production or in any environment
+# Opening all IP address is for this demo and lab only
+echo "7. Update SQL Server Firewall"
+az sql server firewall-rule create -n allowall --start-ip-address 1.1.1.1 --end-ip-addres 255.255.255.255 -g $rgName -s $sqlsvrName
+az sql server firewall-rule create -g $rgName -s $sqlsvrName -n allowazure --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+
+# Create a SQL DB
+echo "8. Create a SQL DB " $sqldbName
+az sql db create --name $sqldbName --resource-group $rgName --server $sqlsvrName --service-objective S1 
+# Get uri where sql backup is
+bloburi="https://$blobName.blob.core.windows.net/$containerName/$objName"
+time=2020-01-01T00:00:00Z
+sas=$(az storage blob generate-sas --account-name $blobName --container-name $containerName --name $objName --permissions r --expiry $time --output tsv)
+
+# Restore SQL DB 
+az sql db import -s $sqlsvrName -n $sqldbName -g $rgName -p $sqlpwd -u $sqladm --storage-key $sas --storage-key-type SharedAccessKey --storage-uri $bloburi
+
+# Create edge Linux VM
 az vm create --resource-group $rgName --name 'azlab'$num'edge' --image Canonical:UbuntuServer:16.04-LTS:latest --admin-username $id --admin-password $sqlpwd --size Standard_B1ms --no-wait
 
+# Create developer Windows VM
 vmImage="microsoft-ads:windows-data-science-vm:windows2016:latest"
 az vm image accept-terms --urn microsoft-ads:windows-data-science-vm:windows2016:latest
-
-az vm create --resource-group $rgName --name 'azlab'$num'wvm' --image $vmImage --admin-username $id --admin-password $sqlpwd --size Standard_DS3_v3 --no-wait
+az vm create --resource-group $rgName --name 'azlab'$num'wvm' --image $vmImage --admin-username $id --admin-password $sqlpwd --size Standard_DS3_v2 --no-wait
 
 # See lab environment
 echo "Subscription Name:" $subName
 echo "Resource Group:   " $rgName
+echo "Location:         " $loc
 echo "Blob:             " $blobName
 echo "Blob Key:         " $blobkey1
 echo "Conatiner:        " $containerName
+echo "ID for lab        " $id
 echo "SQL Server:       " $sqlsvrName
 echo "SQL Database:     " $sqladm
 echo "SQL DB Password:  " $sqlpwd
+
+echo "3. Create CosmosDB"
+az cosmosdb create -g $rgName --name $cosmosAcctName 
+
+# Create a database
+az cosmosdb database create --resource-group $rgName --name $cosmosAcctName --db-name $cosmosDBName
+
+# Create a SQL API container with a partition key and 1000 RU/s
+az cosmosdb collection create --resource-group $rgName --collection-name iotdevicelog --name $cosmosAcctName --db-name rawlog --partition-key-path /mypartitionkey --throughput 400
+
+# See lab environment
+echo "Subscription Name:" $subName
+echo "Resource Group:   " $rgName
 echo "Location:         " $loc
-echo $sqldbconn
+echo "Blob:             " $blobName
+echo "Blob Key:         " $blobkey1
+echo "Conatiner:        " $containerName
+echo "ID for lab        " $id
+echo "SQL Server:       " $sqlsvrName
+echo "SQL Database:     " $sqladm
+echo "SQL DB Password:  " $sqlpwd
