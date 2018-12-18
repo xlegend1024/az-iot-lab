@@ -1,0 +1,98 @@
+# This is the IOT Extension for Azure CLI.
+# You only need to install this the first time.
+# You need it to create the device identity. 
+az extension add --name azure-cli-iot-ext
+
+# Set the values for the resource names that don't have to be globally unique.
+# The resources that have to have unique names are named in the script below
+#   with a random number concatenated to the name so you can probably just
+#   run this script, and it will work with no conflicts.
+num=$(shuf -i0-1000 -n1)
+location=westus
+resourceGroup=az-lab-$num
+iotHubConsumerGroup=aziotlab
+containerName=aziotresult
+iotDeviceName=az-iot-lab-Dev$num 
+
+# Create the resource group to be used
+#   for all the resources for this tutorial.
+az group create --name $resourceGroup \
+    --location $location
+
+# The IoT hub name must be globally unique, so add a random number to the end.
+iotHubName=aziotlab$num
+echo "IoT hub name = " $iotHubName
+
+# Create the IoT hub.
+az iot hub create --name $iotHubName \
+    --resource-group $resourceGroup \
+    --sku S1 --location $location
+
+# Add a consumer group to the IoT hub.
+az iot hub consumer-group create --hub-name $iotHubName \
+    --name $iotHubConsumerGroup
+
+# The storage account name must be globally unique, so add a random number to the end.
+storageAccountName=aziotlabdata$num
+echo "Storage account name = " $storageAccountName
+
+# Create the storage account to be used as a routing destination.
+az storage account create --name $storageAccountName \
+    --resource-group $resourceGroup \
+    --location $location \
+    --sku Standard_LRS
+
+# Get the primary storage account key. 
+#    You need this to create the container.
+storageAccountKey=$(az storage account keys list \
+    --resource-group $resourceGroup \
+    --account-name $storageAccountName \
+    --query "[0].value" | tr -d '"') 
+
+# See the value of the storage account key.
+echo "$storageAccountKey"
+
+# Create the container in the storage account. 
+az storage container create --name $containerName \
+    --account-name $storageAccountName \
+    --account-key $storageAccountKey \
+    --public-access off 
+
+# The Service Bus namespace must be globally unique, so add a random number to the end.
+sbNameSpace=aziotbus$num
+echo "Service Bus namespace = " $sbNameSpace
+
+# Create the Service Bus namespace.
+az servicebus namespace create --resource-group $resourceGroup \
+    --name $sbNameSpace \
+    --location $location
+
+# The Service Bus queue name must be globally unique, so add a random number to the end.
+sbQueueName=aziothubque$num
+echo "Service Bus queue name = " $sbQueueName
+
+# Create the Service Bus queue to be used as a routing destination.
+az servicebus queue create --name $sbQueueName \
+    --namespace-name $sbNameSpace \
+    --resource-group $resourceGroup
+
+# Create the IoT device identity to be used for testing.
+az iot hub device-identity create --device-id $iotDeviceName \
+    --hub-name $iotHubName
+
+echo "IoT Device Name" $iotDeviceName
+
+# Retrieve the information about the device identity, then copy the primary key to
+#   Notepad. You need this to run the device simulation during the testing phase.
+az iot hub device-identity show --device-id $iotDeviceName \
+    --hub-name $iotHubName
+
+pwd='1q2w3e4r5t6y'$num
+
+az vm create --resource-group $resourceGroup --name EdgeVM$num --image Canonical:UbuntuServer:16.04-LTS:latest --admin-username azureadmin --admin-password $pwd --size Standard_B1ms
+
+az vm image --urn microsoft-ads:windows-data-science-vm:windows2016:latest
+
+az vm create --resource-group $resourceGroup --name windows$num --image microsoft-ads:windows-data-science-vm:windows2016:latest --admin-username azureadmin --admin-password $pwd --size Standard_DS3_v2
+
+echo "Your VM ID and Password are azureadmin and "$pwd
