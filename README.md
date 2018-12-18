@@ -4,28 +4,38 @@
 
 00. Create lab environment
 
+> __Login Windows Server Virtual Machine for rest of Labs__
+> Login Windows Server VM
+> Login Azure inside of the VM 
+
 01. Create Cloud Gateway
 
-Download the sample Node.js project from https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip and extract the ZIP archive.
-
-## Create Azure IoT Hub
-
-## Register a Device
+Lab 1 Create Azure IoT Hub
 
 ## Device-to-Cloud (D2C)
 
-Lab 1 https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-node
+> __Download__ the sample Node.js project from https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip and extract the ZIP archive.
 
-## Send Telemetry to Cloud
+Lab 2 https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-node
+
+## Time Serise Insight
+
+Lab 3. Create Time Serise Insight and Visualize data
 
 ## Cloud-to-Device (C2D)
 
-Lab 2 https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-control-device-node
+Lab 4. https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-control-device-node
 
 ## IoT Edge
 
-Lab 5 https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux
+Lab 5. https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux
 
-tempSensor
+02. Real-time Analytics
 
-0
+Lab 6. Create Azure Stream Analytics Jobs
+
+* Store raw data
+    * Store recored by recored
+
+* Store aggregated data
+    * 1 Minute and 1 Hour aggregation
