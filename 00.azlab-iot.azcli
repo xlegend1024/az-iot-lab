@@ -25,18 +25,6 @@ else
 fi
 
 echo "This script will create a resource goup in Korea South region"
-echo "Type location for the lab"
-read -p "Is it correct? [Y/N]" answer
-
-# set azure region
-if [ ! -z "$answer" ]; then
-    echo "Please check region again."
-elif !( $answer = "Y" ) then
-    echo "Please check region again."
-    exit
-else then 
-    echo "Resources will be created in Korea South region"
-fi
 
 # az account list-locations --output table --query []['name','displayName']
 # echo "Type location for the lab"
