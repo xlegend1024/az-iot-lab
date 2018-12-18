@@ -31,7 +31,7 @@ read -p "Is it correct? [Y/N]" answer
 # set azure region
 if [ ! -z "$answer" ]; then
     echo "Please check region again."
-else if [ ! $answer = "Y" ]
+elif [ ! $answer = "Y" ] then
     echo "Please check region again."
     exit
 else 
