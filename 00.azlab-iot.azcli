@@ -34,6 +34,8 @@ if [ ! -z "$answer" ]; then
 else if [ ! $answer = "Y" ]
     echo "Please check region again."
     exit
+else 
+    echo "Resources will be created in Korea South region"
 fi
 
 # az account list-locations --output table --query []['name','displayName']
