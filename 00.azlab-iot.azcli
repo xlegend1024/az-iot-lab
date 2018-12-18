@@ -56,7 +56,7 @@ fi
 #   run this script, and it will work with no conflicts.
 num=$(shuf -i0-1000 -n1)
 loc=koreasouth
-location1=eastasia
+loc2=eastasia
 
 # if you have exsiting one please use the one
 num=$(shuf -i0-1000 -n1)
