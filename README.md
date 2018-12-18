@@ -6,7 +6,7 @@
 
 > __Login Windows Server Virtual Machine for rest of Labs__
 > Login Windows Server VM
-> Login Azure inside of the VM 
+> Login Azure inside of the VM
 
 01. Create Cloud Gateway
 
