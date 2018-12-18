@@ -93,12 +93,12 @@ az vm create --resource-group $rgName --name 'azlab'$num'wvm' --image $vmImage -
 
 # See lab environment
 echo "Subscription Name:" $subName
-echo "Location:         " $loc
+echo "Resource Group:   " $rgName
 echo "Blob:             " $blobName
 echo "Blob Key:         " $blobkey1
 echo "Conatiner:        " $containerName
 echo "SQL Server:       " $sqlsvrName
 echo "SQL Database:     " $sqladm
-echo "Resource Group:   " $rgName
 echo "SQL DB Password:  " $sqlpwd
+echo "Location:         " $loc
 echo $sqldbconn
