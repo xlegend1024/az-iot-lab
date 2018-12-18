@@ -2,7 +2,7 @@
 
 ## Setup Hands-on Lab Environment
 
-### 00. Create lab environment
+### [00. Create lab environment](https://github.com/xlegend1024/az-iot-hol/blob/master/00CreateLab.md)
 
 > __Login Windows Server Virtual Machine for rest of Labs__
 > Login Windows Server VM
@@ -16,7 +16,7 @@ Lab 1 Create Azure IoT Hub
 
 Lab 2 https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-node
 
-Device-to-Cloud (D2C)
+    Device-to-Cloud (D2C)
 
 ### 02. Time Serise Insight
 
@@ -24,7 +24,7 @@ Lab 3. Create Time Serise Insight and Visualize data
 
 Lab 4. https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-control-device-node
 
-Cloud-to-Device (C2D)
+    Cloud-to-Device (C2D)
 
 ## 03. IoT Edge
 
@@ -34,13 +34,13 @@ Lab 5. https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux
 
 Lab 6. Create Azure Stream Analytics Jobs
 
-* Store raw data
-    * Use CosmosDB and Blob
-    * Store recored by recored
+    * Store raw data
+        * Use CosmosDB and Blob
+        * Store recored by recored
 
-* Store aggregated data
-    * Use SQL Database
-    * 1 Minute and 1 Hour aggregation
+    * Store aggregated data
+        * Use SQL Database
+        * 1 Minute and 1 Hour aggregation
 
-[Stream Analytics Query](https://raw.githubusercontent.com/xlegend1024/az-iot-hol/master/StreamAnalyticJobs/query.sql)
+    [Stream Analytics Query](https://raw.githubusercontent.com/xlegend1024/az-iot-hol/master/StreamAnalyticJobs/query.sql)
 

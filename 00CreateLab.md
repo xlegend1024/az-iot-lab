@@ -41,11 +41,11 @@ Using Azure Cloud Shell and Azure Cli script you can create a lab environment fa
     Make sure you use correct __Azure Subscription__ for the Hands-on lab.
 
 1. Make sure you have a resource group and resources:
-* Linux Virtual Machine
-* Windows Virtual Machine 
-* Blob 
-* CosmosDB
-* SQL Database
+    * Linux Virtual Machine
+    * Windows Virtual Machine 
+    * Blob 
+    * CosmosDB
+    * SQL Database
 
 ---
 [Main](https://github.com/xlegend1024/az-iot-hol)
