@@ -34,7 +34,7 @@ if [ ! -z "$answer" ]; then
 elif !( $answer = "Y" ) then
     echo "Please check region again."
     exit
-else 
+else then 
     echo "Resources will be created in Korea South region"
 fi
 
