@@ -24,18 +24,29 @@ else
     exit
 fi
 
-echo ""
-az account list-locations --output table --query []['name','displayName']
+echo "This script will create a resource goup in Korea South region"
 echo "Type location for the lab"
-read -p "Location >>" loc
+read -p "Is it correct? [Y/N]" answer
 
 # set azure region
-if [ ! -z "$loc" ]; then
-    echo "You set location" $loc " for the lab."
-else
-    echo "Default location is West US 2"
-    loc=westus2
+if [ ! -z "$answer" ]; then
+    echo "Please check region again."
+else if [ ! $answer = "Y" ]
+    echo "Please check region again."
+    exit
 fi
+
+# az account list-locations --output table --query []['name','displayName']
+# echo "Type location for the lab"
+# read -p "Location >>" loc
+
+# # set azure region
+# if [ ! -z "$loc" ]; then
+#     echo "You set location" $loc " for the lab."
+# else
+#     echo "Default location is West US 2"
+#     loc=westus2
+# fi
 
 # Set the values for the resource names that don't have to be globally unique.
 # The resources that have to have unique names are named in the script below
@@ -45,7 +56,6 @@ num=$(shuf -i0-1000 -n1)
 loc=koreasouth
 location1=eastasia
 
-# 3. get subscruption ID
 # if you have exsiting one please use the one
 num=$(shuf -i0-1000 -n1)
 rgName='azlab-'$num'-rg' #Save it as ps1

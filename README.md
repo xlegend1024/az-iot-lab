@@ -2,11 +2,13 @@
 
 ## Setup Hands-on Lab Environment
 
-1. Create Resources
+00. Create lab environment
+
+01. Create Resources
 
 Create a resource for lab incluing a DSVM Windows 2016 
 
-2. Download Sample Code (Node.js)
+02. Download Sample Code (Node.js)
 
 Download the sample Node.js project from https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip and extract the ZIP archive.
 
