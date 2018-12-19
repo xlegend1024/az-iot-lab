@@ -30,6 +30,8 @@ Login Windows Server VM, "**azlab###wvm**" and __Download__ the sample project f
 
 ### [Lab 5. Deploy IoT Edge](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux)
 
+[Runtime install](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge-linux)
+
 ## 04. Real-time Analytics
 
 ### Lab 6. Create Azure Stream Analytics Jobs
