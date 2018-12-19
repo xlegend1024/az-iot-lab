@@ -1,4 +1,4 @@
-# az-iot-hol
+# Microsoft Azure IoT Hands-on Lab
 
 ## Architecture
 
