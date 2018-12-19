@@ -131,7 +131,7 @@ az cosmosdb create -g $rgName --name $cosmosAcctName
 az cosmosdb database create --resource-group $rgName --name $cosmosAcctName --db-name $cosmosDBName
 
 # Create a SQL API container with a partition key and 1000 RU/s
-az cosmosdb collection create --resource-group $rgName --collection-name rawlog --name $cosmosAcctName --db-name $cosmosDBName --partition-key-path /mypartitionkey --throughput 400
+az cosmosdb collection create --resource-group $rgName --collection-name rawlog --name $cosmosAcctName --db-name $cosmosDBName --partition-key-path /PartitionId --throughput 400
 
 # See lab environment
 echo "Subscription Name:" $subName

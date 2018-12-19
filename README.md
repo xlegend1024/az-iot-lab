@@ -35,6 +35,12 @@ Store raw data
 * Use CosmosDB and Blob
 * Store recored by recored
 
+> To save logs in Blob, use following sample 
+
+```
+{datetime:yyyy}/{datetime:MM}/{datetime:dd}/{datetime:HH}/{datetime:mm}
+```
+
 Store aggregated data
 
 * Use SQL Database
