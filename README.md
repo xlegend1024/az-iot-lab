@@ -1,5 +1,9 @@
 # az-iot-hol
 
+## Architecture
+
+![arch](./images/az-iot-lab-archi.png)
+
 ## Setup Hands-on Lab Environment
 
 ## [00. Create lab environment](https://github.com/xlegend1024/az-iot-hol/blob/master/00CreateLab.md)
