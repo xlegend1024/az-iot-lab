@@ -41,7 +41,17 @@ Store raw data
 * Use CosmosDB and Blob
 * Store recored by recored
 
-> To save logs in Blob, use following sample 
+Input/Output Names
+
+|Resource|Alias Name|
+|---|---|
+|Azure IoT Hub|iothub|
+|Azure Cosmos DB|cosmosdb|
+|Azure Storage Account(Blob)|blob|
+|SQL Databse.tbl1mavg|sql1mtbl|
+|SQL Database.tbl1havg|sql1htbl|
+
+> To save logs in Blob, use following sample
 
 ```
 {datetime:yyyy}/{datetime:MM}/{datetime:dd}/{datetime:HH}/{datetime:mm}
@@ -52,38 +62,8 @@ Store aggregated data
 * Use SQL Database
 * 1 Minute and 1 Hour aggregation
 
-[Stream Analytics Query](https://raw.githubusercontent.com/xlegend1024/az-iot-hol/master/StreamAnalyticJobs/query.sql)
+Use Stream Analytics Query with following
 
-```sql
-SELECT
-    *
-INTO
-    cosmosdb
-FROM
-    iothub
+[Stream Analytics Query](https://raw.githubusercontent.com/xlegend1024/az-iot-hol/master/StreamAnalyticJobs/IoTEdge_ASA.sql)
 
-SELECT
-    input.IoTHub.ConnectionDeviceId as deviceID, timeCreated, temperature as machine_temp, pressure as machine_press, temperature as ambient_temp, humidity as ambient_humi
-INTO
-    blob
-FROM
-    iothub as input
-
-SELECT
-    input.IoTHub.ConnectionDeviceId as deviceID, System.TimeStamp AS timeCreated, AVG(temperature) as machine_temp, AVG(pressure) as machine_press, avg(temperature) as ambient_temp, avg(humidity) as ambient_humi
-INTO
-    sqldb
-FROM
-    iothub as input
-GROUP BY
-    input.IoTHub.ConnectionDeviceId, TumblingWindow(minute, 1)
-
-SELECT
-    input.IoTHub.ConnectionDeviceId as deviceID, System.TimeStamp AS timeCreated, AVG(temperature) as machine_temp, AVG(pressure) as machine_press, avg(temperature) as ambient_temp, avg(humidity) as ambient_humi
-INTO
-    sqldb2
-FROM
-    iothub as input
-GROUP BY
-    input.IoTHub.ConnectionDeviceId, TumblingWindow(hour, 1)
-```
+---
