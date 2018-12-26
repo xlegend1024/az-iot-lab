@@ -8,9 +8,11 @@
 
 ## [00. Create lab environment](https://github.com/xlegend1024/az-iot-hol/blob/master/00CreateLab.md)
 
-> __Login Windows Server Virtual Machine for rest of Labs__
-> Login Windows Server VM
-> Login Azure inside of the VM
+> __Login Windows Server Virtual Machine for rest of Labs__ from now here
+>
+> Login Windows Server VM and open browser, go to [Azure IoT Hands-on Lab](https://aka.ms/mtcs-iotlab)
+>
+> Login [Azure Portal](https://portal.azure.com) inside of the VM
 
 Login Windows Server VM, "**azlab###wvm**" and __Download__ the sample project from https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip.
 
