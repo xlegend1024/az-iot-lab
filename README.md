@@ -14,36 +14,48 @@
 >
 > Login [Azure Portal](https://portal.azure.com) inside of the VM
 
-Login Windows Server VM, "**azlab###wvm**" and __Download__ the sample project from https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip.
-
 ## 01. Create Cloud Gateway
+
+Login Windows Server VM, "**azlab###wvm**" and __Download__ the sample project from [here](https://github.com/xlegend1024/az-iot-hol/raw/master/AzureIoTDevice/azure-iot-samples-node-master.zip).
 
 ### Lab 1. Create Azure IoT Hub
 
+Create Cloud Gateway for a IoT Solution
+
 ### [Lab 2. Device-to-Cloud (D2C)](https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-node)
+
+Authenticate your device application and send data
 
 ## 02. Time Serise Insight
 
+Let's see what kind of data comes from the device
+
 ### Lab 3. Create Time Serise Insight and Visualize data
 
+Create Real-time Dashboard
+
 ### [Lab 4. Cloud-to-Device (C2D)](https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-control-device-node)
+
+Commanmd and control your device
 
 ## 03. IoT Edge
 
 ### [Lab 5. Deploy IoT Edge](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux)
 
-[Runtime install](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge-linux)
+[To install IoT Edge Runtime](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge-linux)
 
 ## 04. Real-time Analytics
 
+Analyze stream data in real-time
+
 ### Lab 6. Create Azure Stream Analytics Jobs
 
-Store raw data
+Store raw data To:
 
 * Use CosmosDB and Blob
 * Store recored by recored
 
-Input/Output Names
+Input/Output Names:
 
 |Resource|Alias Name|
 |---|---|
