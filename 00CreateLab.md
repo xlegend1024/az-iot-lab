@@ -25,7 +25,7 @@ Using Azure Cloud Shell and Azure Cli script you can create a lab environment fa
     > Please copy below command and past it to cloud shell prompt
 
     ```
-    wget -O azlab.azcli https://raw.githubusercontent.com/xlegend1024/az-iot-hol/master/azcli/00.azlab-iot.azcli
+    wget -O azlab.azcli https://raw.githubusercontent.com/xlegend1024/az-iot-hol/master/azcli/00.azlab-iot_us.azcli
     ```
 
 1. Run command to create a resource group and resource
