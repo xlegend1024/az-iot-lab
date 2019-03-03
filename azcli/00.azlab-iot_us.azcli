@@ -24,12 +24,11 @@ else
     exit
 fi
 
-echo "This script will create a resource goup in Korea South region"
 echo "Type location for the lab"
-
+echo ""
 az account list-locations --output table --query []['name','displayName']
-echo "Type location for the lab"
-echo "For example, westus2"
+echo ""
+echo "Type location for the lab. For example, westus2 or eastus2"
 echo ""
 read -p "Location >>" loc
 
@@ -61,10 +60,13 @@ sqladm=sqladmin
 # User password 
 sqlpwd=1q2w3e4r5t^Y
 
+echo ""
+
 # Create the Resource Group
 # if you have exsiting one you can skip this part
-echo "1. Create Resource Group " $rgName
-if (ture); then
+if [ ture ]
+then
+    echo "1. Create Resource Group " $rgName
     az group create --name $rgName --location $loc
 fi
 
@@ -96,19 +98,22 @@ az sql server firewall-rule create -g $rgName -s $sqlsvrName -n allowazure --sta
 az sql db create --name $sqldbName --resource-group $rgName --server $sqlsvrName --service-objective S1 
 
 # Get SQL DB Connection
-sqldbconn=$(az sql db show-connection-string -s $sqlsvrName -n $sqldbName -c ado.net)
-sqldbconn=${_sqldbconn/<username>/$sqladm}
-sqldbconn=${_sqldbconn/<password>/$sqlpwd}
-
+# sqldbconn=$(az sql db show-connection-string -s $sqlsvrName -n $sqldbName -c ado.net)
+# sqldbconn="${sqldbconn/<username>/$sqladm}"
+# sqldbconn="${sqldbconn/<password>/$sqlpwd}"
+# echo $sqldbconn
 
 # Create Sample Table
 # Download query
-wget -O ./azlab-sqldb-tbl.sql https://raw.githubusercontent.com/xlegend1024/az-iot-lab/master/sqldb/createtable.sql
-sqlcmd -S $sqlsvrName'.database.windows.net' -d $sqldbName -U $sqladm -P $sqlpwd -i ./azlab-sqldb-tbl.sql
+wget -O ./az-iot-lab.sql https://raw.githubusercontent.com/xlegend1024/az-iot-lab/master/sqldb/createtable2.sql
+sqlcmd -S $sqlsvrName'.database.windows.net' -d $sqldbName -U $sqladm -P $sqlpwd -i ./az-iot-lab.sql
 
 # Create edge Linux VM
 echo "5. Create Linux VM for IoT Edge "
-az vm create --resource-group $rgName --name 'azlab'$num'edge' --image Canonical:UbuntuServer:16.04-LTS:latest --admin-username $id --admin-password $sqlpwd --size Standard_B1ms --no-wait
+# az vm create --resource-group IoTEdgeResources --name EdgeVM --image microsoft_iot_edge:iot_edge_vm_ubuntu:ubuntu_1604_edgeruntimeonly:latest --admin-username azureuser --generate-ssh-keys --size Standard_DS1_v2
+# az vm create --resource-group $rgName --name 'azlab'$num'edge' --image Canonical:UbuntuServer:16.04-LTS:latest --admin-username $id --admin-password $sqlpwd --size Standard_B1ms --no-wait
+az vm image accept-terms --urn microsoft_iot_edge:iot_edge_vm_ubuntu:ubuntu_1604_edgeruntimeonly:latest
+az vm create --resource-group $rgName --name 'azlab'$num'edge' --image microsoft_iot_edge:iot_edge_vm_ubuntu:ubuntu_1604_edgeruntimeonly:latest --admin-username $id --admin-password $sqlpwd --size Standard_DS1_v2 --no-wait
 
 # Create developer Windows VM
 echo "6. Create Windows VM for IoT Development"
@@ -116,7 +121,10 @@ vmImage="microsoft-ads:windows-data-science-vm:windows2016:latest"
 az vm image accept-terms --urn microsoft-ads:windows-data-science-vm:windows2016:latest
 az vm create --resource-group $rgName --name 'azlab'$num'wvm' --image $vmImage --admin-username $id --admin-password $sqlpwd --size Standard_DS3_v2 --no-wait
 
-echo "7. Create CosmosDB"
+echo "7. Create ACR (Azure Container Registry)"
+az acr create --name 'azlab'$num'acr' -g $rgName --sku Standard --location $loc --admin-enabled true
+
+echo "8. Create CosmosDB"
 az cosmosdb create -g $rgName --name $cosmosAcctName 
 
 # Create a database
@@ -136,7 +144,7 @@ echo "[Database infro]" >> ./azlab.txt
 echo "SQL Server:       " $sqlsvrName >> ./azlab.txt
 echo "SQL Database:     " $sqladm >> ./azlab.txt
 echo "SQL DB Password:  " $sqlpwd >> ./azlab.txt
-echo "SQL DB Connection:" $sqldbconn >> ./azlab.txt
+#echo "SQL DB Connection:" $sqldbconn >> ./azlab.txt
 echo "[Virtual Machine]" >> ./azlab.txt
 echo "Ip Addresses" >> ./azlab.txt
 echo $(az vm list-ip-addresses --query [].virtualMachine --resource-group $rgName) >> ./azlab.txt
