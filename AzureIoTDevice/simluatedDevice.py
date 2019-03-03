@@ -34,7 +34,7 @@ MSG_TXT = "{\"eventtype\": \"%s\", \"bagid\": \"%s\", \"partnerid\": \"%s\", \"e
 INTERVAL = 30
 
 def send_confirmation_callback(message, result, user_context):
-    #print ( "IoT Hub responded to message with status: %s" % (result) )
+    print ( "IoT Hub responded to message with status: %s" % (result) )
 
 def iothub_client_init():
     # Create an IoT Hub client

@@ -8,7 +8,7 @@ FROM
 
 -- Aggregate events every 10 minutes
 SELECT 
-    DATEADD(minute,-3,System.TimeStamp) as startdatetime,
+    DATEADD(minute,-10,System.TimeStamp) as startdatetime,
     System.TimeStamp AS enddatetime,
     employeeid,
     storeid,
@@ -16,7 +16,7 @@ SELECT
     count(DISTINCT bagid) as totalbag
 INTO tbl10mperf
 FROM iothub  
-GROUP BY employeeid, storeid, TumblingWindow(minute, 3)
+GROUP BY employeeid, storeid, TumblingWindow(minute, 10)
 
 -- query 3
 SELECT 
