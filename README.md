@@ -50,11 +50,6 @@ Analyze stream data in real-time
 
 ### Lab 6. Create Azure Stream Analytics Jobs
 
-Store raw data To:
-
-* Use CosmosDB and Blob
-* Store recored by recored
-
 Input/Output Names:
 
 |Resource|Alias Name|
@@ -62,8 +57,9 @@ Input/Output Names:
 |Azure IoT Hub|iothub|
 |Azure Cosmos DB|cosmosdb|
 |Azure Storage Account(Blob)|blob|
-|SQL Databse.tbl1mavg|sql1mtbl|
-|SQL Database.tbl1havg|sql1htbl|
+|SQL Databse.tbl10mperf|tbl10mperf|
+|SQL Database.tblworklogs|tblworklogs|
+|SQL Database.tblbagevent|tblbagevent|
 
 > To save logs in Blob, use following sample
 
@@ -71,13 +67,18 @@ Input/Output Names:
 {datetime:yyyy}/{datetime:MM}/{datetime:dd}/{datetime:HH}/{datetime:mm}
 ```
 
-Store aggregated data
+1. To store raw data To:
+
+* Use CosmosDB and Blob
+* Store recored by recored
+
+1. To store aggregated data
 
 * Use SQL Database
-* 1 Minute and 1 Hour aggregation
+* 10 minutes aggregation
 
-Use Stream Analytics Query with following
+1. Use Stream Analytics Query with following
 
-[Stream Analytics Query](https://raw.githubusercontent.com/xlegend1024/az-iot-hol/master/StreamAnalyticJobs/IoTEdge_ASA.sql)
+[Stream Analytics Query](https://raw.githubusercontent.com/xlegend1024/az-iot-lab/master/StreamAnalyticJobs/productionline.sql)
 
 ---

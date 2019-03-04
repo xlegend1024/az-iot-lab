@@ -6,6 +6,14 @@ INTO
 FROM
     iothub 
 
+-- Save raw data to CosmosDB as JSON form
+SELECT
+    *
+INTO
+    cosmosdb
+FROM
+    iothub 
+
 -- Aggregate events every 10 minutes
 SELECT 
     DATEADD(minute,-10,System.TimeStamp) as startdatetime,
@@ -19,18 +27,18 @@ FROM iothub
 GROUP BY employeeid, storeid, TumblingWindow(minute, 10)
 
 -- query 3
-SELECT 
-    iothub.[IoTHub].[ConnectionDeviceId] as deviceid, 
-    DATEADD(minute,-10,System.TimeStamp) as captureddatetime,
-    eventtype,
-    bagid,
-    partnerid,
-    employeeid,
-    storeid,
-    count(*) as eventcount
-INTO tblbaghistory
-FROM iothub 
-GROUP BY iothub.[IoTHub].[ConnectionDeviceId], eventtype, employeeid, storeid, partnerid, bagid, TumblingWindow(minute, 10)
+-- SELECT 
+--     iothub.[IoTHub].[ConnectionDeviceId] as deviceid, 
+--     DATEADD(minute,-10,System.TimeStamp) as captureddatetime,
+--     eventtype,
+--     bagid,
+--     partnerid,
+--     employeeid,
+--     storeid,
+--     count(*) as eventcount
+-- INTO tblbaghistory
+-- FROM iothub 
+-- GROUP BY iothub.[IoTHub].[ConnectionDeviceId], eventtype, employeeid, storeid, partnerid, bagid, TumblingWindow(minute, 10)
 
 -- query 4
 SELECT 
