@@ -62,11 +62,8 @@ echo ""
 
 # Create the Resource Group
 # if you have exsiting one you can skip this part
-if [ ture ]
-then
-    echo "1. Create Resource Group " $rgName
-    az group create --name $rgName --location $loc
-fi
+echo "1. Create Resource Group " $rgName
+az group create --name $rgName --location $loc
 
 # Storage Account
 # Create the Storage Account
