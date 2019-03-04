@@ -63,7 +63,7 @@ Input/Output Names:
 
 > To save logs in Blob, use following sample
 
-```json
+```text
 {datetime:yyyy}/{datetime:MM}/{datetime:dd}/{datetime:HH}/{datetime:mm}
 ```
 
