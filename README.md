@@ -82,3 +82,5 @@ Input/Output Names:
     [Stream Analytics Query](https://raw.githubusercontent.com/xlegend1024/az-iot-lab/master/StreamAnalyticJobs/productionline.sql)
 
 ---
+
+## [IoT Workshop Survey](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0JSaga_FjVEoJdptOgnS7pUQVhFT0lQNEVOMFo5MlM4RzM3SElRRUxXSS4u) 
