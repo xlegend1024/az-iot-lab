@@ -3,8 +3,6 @@
 # Select Azure subscription
 az account list --output table
 
-echo "\n\r"
-
 read -p "Type Subscription Name for lab (cAsE sEnsItIvE)>>" subName
 
 if [ ! -z "$subName" ]; then
