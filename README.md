@@ -69,16 +69,16 @@ Input/Output Names:
 
 1. To store raw data To:
 
-* Use CosmosDB and Blob
-* Store recored by recored
+    * Use CosmosDB and Blob
+    * Store recored by recored
 
 1. To store aggregated data
 
-* Use SQL Database
-* 10 minutes aggregation
+    * Use SQL Database
+    * 10 minutes aggregation
 
 1. Use Stream Analytics Query with following
 
-[Stream Analytics Query](https://raw.githubusercontent.com/xlegend1024/az-iot-lab/master/StreamAnalyticJobs/productionline.sql)
+    [Stream Analytics Query](https://raw.githubusercontent.com/xlegend1024/az-iot-lab/master/StreamAnalyticJobs/productionline.sql)
 
 ---
